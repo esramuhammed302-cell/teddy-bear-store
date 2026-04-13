@@ -1,0 +1,104 @@
+.container {
+  h1 {
+    font-weight: bold;
+    color: #2d1f26;
+  }
+
+  h4 {
+    color: #7f8c8d;
+  }
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .image-container {
+    position: relative;
+
+    img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .badge-stock {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: white;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+      &.out-of-stock {
+        background-color: #e74c3c;
+      }
+      &.last-item {
+        background-color: #f39c12;
+        animation: pulse 1.5s infinite;
+      }
+      &.warning-stock {
+        background-color: #f1c40f;
+        color: #2d1f26;
+      }
+      &.in-stock {
+        background-color: #095529;
+      }
+    }
+  }
+
+  .card-title {
+    font-weight: bold;
+    color: #2d1f26;
+  }
+
+  .card-body {
+    .price {
+      font-weight: bold;
+      color: #27ae60;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+input,
+select {
+  border-radius: 10px;
+  width: 300px;
+}
+
+option {
+  color: #2d1f26;
+}
+
+button {
+  border-radius: 8px;
+  background-color: #2d1f26 !important;
+  color: wheat !important;
+
+  &:hover {
+    background-color: #7f8c8d !important;
+    color: white !important;
+  }
+}

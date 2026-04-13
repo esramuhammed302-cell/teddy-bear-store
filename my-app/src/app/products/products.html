@@ -1,0 +1,81 @@
+<div class="container-fluid mt-4 d-flex gap-5">
+  <aside>
+    <input
+      type="text"
+      class="form-control mb-3"
+      placeholder="Search by product name.."
+      [(ngModel)]="searchText"
+    />
+    <select class="form-select mb-4" [(ngModel)]="selectedCategoryID">
+      <option value="0">All Categories</option>
+      @for (category of categories; track category.ID) {
+        <option [value]="category.ID">{{ category.Name }}</option>
+      }
+    </select>
+  </aside>
+
+  <div class="flex-grow-1">
+    <div class="row">
+      @for (product of filteredProducts; track product.ID) {
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div
+            class="card h-100 shadow-sm"
+            appProductCard
+            [ngStyle]="{ 'background-color': product.Quantity == 1 ? '#fff3cd' : 'white' }"
+          >
+            <div class="image-container">
+              <img [src]="product.Img" class="card-img-top" />
+              @switch (product.Quantity) {
+                @case (0) {
+                  <span class="badge-stock out-of-stock">Out of Stock</span>
+                }
+                @case (1) {
+                  <span class="badge-stock last-item">Last Item!</span>
+                }
+                @case (2) {
+                  <span class="badge-stock warning-stock">Only 2 Left</span>
+                }
+                @default {
+                  <span class="badge-stock in-stock">Available</span>
+                }
+              }
+            </div>
+
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ product.Name }}</h5>
+              <p class="price">{{ product.Price | currency: 'EGP ' }}</p>
+              <div class="mt-2 d-flex justify-content-center gap-2">
+                <button
+                  class="btn btn-sm"
+                  (click)="buy(product)"
+                  [disabled]="product.Quantity == 0"
+                >
+                  Buy
+                </button>
+                <button class="btn btn-sm btn-outline-dark" (click)="showDetails(product)">
+                  Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      @if (selectedProduct) {
+        <app-product-detail
+          [product]="selectedProduct"
+          [categories]="categories"
+          (close)="closeDetails()"
+        ></app-product-detail>
+      }
+    </div>
+    <button routerLink="/search-products" class="btn btn-outline-secondary mt-4">
+    Products From Platzi API
+    </button>
+    <hr />
+    <p class="text-secondary">Credit Card: {{ '0123456789012345' | creditCard }}</p>
+    <p class="text-secondary">Today: {{ currentDate | date: 'fullDate' }}</p>
+  </div>
+</div>
+
+
+  

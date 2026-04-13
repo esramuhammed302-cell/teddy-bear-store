@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg custom-navbar shadow-sm">
+  <div class="container-fluid px-5">
+    <a class="navbar-brand" routerLink="/">
+      <img
+        [src]="store.Logo"
+        width="40"
+        height="40"
+        class="d-inline-block align-top rounded-circle"
+        alt="Logo"
+      />
+      {{ store.Name }}
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/search-products" routerLinkActive="active">Search</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
+        </li>
+
+        <ng-container *ngIf="!isLoggedIn">
+          <li class="nav-item ms-lg-3">
+            <a class="btn btn-register" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-register" routerLink="/register">Register</a>
+          </li>
+        </ng-container>
+
+        <li class="nav-item ms-lg-3" *ngIf="isLoggedIn">
+          <button class="btn btn-register" (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

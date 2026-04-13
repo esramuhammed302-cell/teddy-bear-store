@@ -1,0 +1,48 @@
+.custom-navbar {
+  background-color: #2d1f26 !important;
+  padding: 15px 0;
+
+  .navbar-brand {
+    color: wheat !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: flex;
+    gap: 10px;
+  }
+
+  .nav-link {
+    color: #dcdde1 !important;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: 0.3s;
+
+    &:hover,
+    &.active {
+      color: wheat !important;
+      border-bottom: 2px solid wheat;
+    }
+  }
+  .btn-register {
+    background-color: wheat;
+    color: #2d1f26 !important;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 6px 20px;
+    margin-left: 10px;
+    transition: 0.3s;
+    border: 2px solid wheat;
+
+    &:hover {
+      background-color: transparent;
+      color: wheat !important;
+    }
+  }
+
+  .navbar-toggler {
+    border-color: wheat;
+    background-color: wheat;
+  }
+}
+.active-btn {
+  box-shadow: 0 0 10px rgba(245, 222, 179, 0.5);
+}

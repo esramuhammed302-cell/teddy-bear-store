@@ -1,0 +1,73 @@
+$primary-dark: #2d1f26;
+$accent-color: #684e5b;
+$bg-light: #fdf8f4;
+$text-wheat: wheat;
+
+.home-container,
+.about-container,
+.contact-container {
+  padding: 0 0;
+  color: $primary-dark;
+}
+
+.hero-section {
+  background:
+    linear-gradient(rgba(45, 31, 38, 0.7), rgba(45, 31, 38, 0.7)),
+    url('././../../../public/WhatsApp\ Image\ 2026-04-11\ at\ 12.41.28\ AM.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  color: $text-wheat;
+  margin-bottom: 100px;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+
+.main-btn,
+.btn-contact {
+  background-color: $primary-dark !important;
+  color: $text-wheat !important;
+  border-radius: 15px;
+  padding: 10px 30px;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: $accent-color !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(245, 222, 179, 0.5);
+  }
+}
+
+.feature-card {
+  padding: 20px;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+
+  i {
+    font-size: 2.5rem;
+    color: $accent-color;
+    margin-bottom: 15px;
+  }
+}
+
+.section-title {
+  font-weight: bold;
+  border-bottom: 3px solid $accent-color;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+input,
+textarea {
+  border-radius: 8px !important;
+  border: 1px solid #ddd !important;
+  &:focus {
+    border-color: $accent-color !important;
+    box-shadow: 0 0 5px rgba(104, 78, 91, 0.3) !important;
+  }
+}

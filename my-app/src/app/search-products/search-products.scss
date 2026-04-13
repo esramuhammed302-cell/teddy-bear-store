@@ -1,0 +1,20 @@
+.product-card {
+  transition: all 0.3s ease-in-out;
+  border-radius: 14px;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+  }
+}
+
+input.form-control {
+  border-radius: 12px;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  
+  &:focus {
+    border-color: #684e5b;
+    box-shadow: 0 0 0 0.25rem rgba(104, 78, 91, 0.1);
+  }
+}
