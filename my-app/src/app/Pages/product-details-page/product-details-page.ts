@@ -10,7 +10,7 @@ import { IProduct } from '../../Models/Iproduct';
   templateUrl: './product-details-page.html',
 })
 export class ProductDetailsPage {
-  product!: IProduct;
+  product!: any;
 
   constructor(
     private route: ActivatedRoute,

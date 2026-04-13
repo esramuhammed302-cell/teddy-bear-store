@@ -69,21 +69,29 @@ export class ProductsService {
       CategoryID: 2,
     },
   ];
-   categories: ICategory[] = [
+  categories: ICategory[] = [
     { ID: 1, Name: 'Chocolate' },
     { ID: 2, Name: 'Strawberry' },
   ];
-
 
   getAllProducts(): IProduct[] {
     return this.productList;
   }
   getAllCategories(): ICategory[] {
-  return this.categories;
-}
+    return this.categories;
+  }
 
-  getProductByID(id: number): IProduct | undefined {
-    return this.productList.find((p) => p.ID === id);
+  getProductByID(id: number): any {
+    const product = this.productList.find((p) => p.ID === id);
+
+    if (!product) return undefined;
+
+    const category = this.categories.find((c) => c.ID === product.CategoryID);
+
+    return {
+      ...product,
+      Category: category,
+    };
   }
   buy(product: IProduct) {
     if (product.Quantity > 0) product.Quantity--;
@@ -93,13 +101,3 @@ export class ProductsService {
     return this.productList.filter((p) => p.Name.toLowerCase().includes(keyword.toLowerCase()));
   }
 }
-
-
-
-
-
-
-
-
-
-

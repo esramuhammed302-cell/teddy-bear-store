@@ -30,11 +30,16 @@
 
         <div class="product-meta mb-4 p-3 bg-light rounded-3">
           <p class="mb-1">
-            <strong>Availability:</strong>
-            <span
-              [class.text-danger]="product.Quantity <= 0"
-              [class.text-success]="product.Quantity > 0"
-            >
+            <p class="mb-1">
+              <strong>Category: </strong>
+              <span class="text-secondary">{{ product.Category?.Name || 'General' }}</span>
+            </p>
+            <p class="mb-1">
+              <strong>Availability:</strong>
+              <span
+                [class.text-danger]="product.Quantity <= 0"
+                [class.text-success]="product.Quantity > 0"
+              >
               {{ product.Quantity > 0 ? 'In Stock (' + product.Quantity + ')' : 'Out of Stock' }}
             </span>
           </p>
