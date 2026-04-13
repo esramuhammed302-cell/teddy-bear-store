@@ -14,12 +14,12 @@ import { ProductDetailsPage } from './Pages/product-details-page/product-details
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: Home },
-  { path: 'products', component: Products },
+  { path: 'products', component: Products , canActivate: [authGuard]},
   { path: 'products/:id', component: ProductDetailsPage, canActivate: [authGuard] },
   { path: 'about', component: About },
   { path: 'contact', component: Contact },
   { path: 'register', component: Register, canActivate: [guestGuard] },
   { path: 'login', component: Login, canActivate: [guestGuard] },
-  { path: 'search-products', component: SearchProducts },
+  { path: 'search-products', component: SearchProducts , canActivate: [authGuard] },
   { path: '**', component: NotFound },
 ];
