@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../Models/Iproduct';
+import { ICategory } from '../Models/Icategory';
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
   private productList: IProduct[] = [
@@ -68,10 +69,18 @@ export class ProductsService {
       CategoryID: 2,
     },
   ];
+   categories: ICategory[] = [
+    { ID: 1, Name: 'Chocolate' },
+    { ID: 2, Name: 'Strawberry' },
+  ];
+
 
   getAllProducts(): IProduct[] {
     return this.productList;
   }
+  getAllCategories(): ICategory[] {
+  return this.categories;
+}
 
   getProductByID(id: number): IProduct | undefined {
     return this.productList.find((p) => p.ID === id);
@@ -94,27 +103,3 @@ export class ProductsService {
 
 
 
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-// import { IProduct } from '../Models/Iproduct';
-
-// @Injectable({ providedIn: 'root' })
-// export class ProductsService {
-
-//   private baseUrl = 'https://api.escuelajs.co/api/v1';
-
-//   constructor(private http: HttpClient) {}
-
-//   getAllProducts(): Observable<IProduct[]> {
-//     return this.http.get<IProduct[]>(`${this.baseUrl}/products?limit=20`);
-//   }
-
-//   getProductByID(id: number): Observable<IProduct> {
-//     return this.http.get<IProduct>(`${this.baseUrl}/products/${id}`);
-//   }
-
-//   searchProducts(title: string): Observable<IProduct[]> {
-//     return this.http.get<IProduct[]>(`${this.baseUrl}/products/?title=${title}&limit=20`);
-//   }
-// }

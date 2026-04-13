@@ -4,7 +4,7 @@ import { ICategory } from '../Models/Icategory';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-product-detail',
-  imports: [RouterLink],
+  imports: [RouterLink ],
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.scss',
 })

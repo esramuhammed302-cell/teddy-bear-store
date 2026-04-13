@@ -5,7 +5,7 @@
   <p>Price: {{ product.Price }} EGP</p>
   <p>Category: {{ getCategoryName(product.CategoryID) }}</p>
   <p>Quantity: {{ product.Quantity }}</p>
-  <button class="btn mt-2" [routerLink]="['/products', product.ID]" (click)="onClose()">
+  <button class="btn mt-2 btn-success " [routerLink]="['/products', product.ID]" (click)="onClose()">
     View Full Details
   </button>
   <button class="btn-close2" (click)="onClose()">Close</button>

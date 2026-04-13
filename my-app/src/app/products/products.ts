@@ -28,20 +28,22 @@ export class Products {
   // StoreOwner: string = 'Esraa';
 
 
-  categories: ICategory[] = [
-    { ID: 1, Name: 'Chocolate' },
-    { ID: 2, Name: 'Strawberry' },
-  ];
+  // categories: ICategory[] = [
+  //   { ID: 1, Name: 'Chocolate' },
+  //   { ID: 2, Name: 'Strawberry' },
+  // ];
 
   selectedCategoryID: number = 0;
 
   searchText: string = '';
 
   productList: IProduct[] = [];
+  categories: ICategory[] = [];
 
   selectedProduct: IProduct | null = null;
-  constructor(private productsService: ProductsService) {
+  constructor(private productsService: ProductsService ) {
     this.productList = this.productsService.getAllProducts();
+    this.categories = this.productsService.getAllCategories();
   }
 
   buy(product: IProduct) {
@@ -67,56 +69,3 @@ export class Products {
   currentDate: Date = new Date();
 }
 
-// import { Component, OnInit } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { RouterLink } from '@angular/router';
-// import { IProduct } from '../Models/Iproduct';
-// import { ProductsService } from '../Services/ProductService';
-// import { CreditCardPipe } from '../shared/pipes/credit-card-pipe';
-// import { ProductCard } from '../shared/directives/product-card';
-
-// @Component({
-//   selector: 'app-products',
-//   standalone: true,
-//   imports: [CommonModule, FormsModule, RouterLink, CreditCardPipe, ProductCard],
-//   templateUrl: './products.html',
-//   styleUrl: './products.scss',
-// })
-// export class Products implements OnInit {
-
-//   productList: IProduct[] = [];
-//   filteredList: IProduct[] = [];
-//   searchText: string = '';
-//   isLoading = true;
-//   errorMsg = '';
-//   currentDate = new Date();
-
-//   constructor(private productsService: ProductsService) {}
-
-//   ngOnInit(): void {
-//     this.productsService.getAllProducts().subscribe({
-//       next: (data) => {
-//         this.productList = data;
-//         this.filteredList = data;
-//         this.isLoading = false;
-//       },
-//       error: () => {
-//         this.errorMsg = 'Failed to load products. Please try again.';
-//         this.isLoading = false;
-//       }
-//     });
-//   }
-
-//   onSearch(): void {
-//     const keyword = this.searchText.toLowerCase();
-//     this.filteredList = this.productList.filter(p =>
-//       p.title.toLowerCase().includes(keyword)
-//     );
-//   }
-
-//   getImage(product: IProduct): string {
-//     return product.images?.[0]?.replace(/["\[\]]/g, '')
-//       || 'https://placehold.co/300x200?text=No+Image';
-//   }
-// }

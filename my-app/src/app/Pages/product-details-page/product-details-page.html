@@ -1,12 +1,51 @@
- <div class="container mt-5 text-center" *ngIf="product">
-      <h2>{{ product.Name }}</h2>
+@if (product) {
+  <div class="container pdp-wrapper mt-5 w-50">
+    <div class="row align-items-center shadow-lg rounded-4 overflow-hidden bg-white">
+      <div
+        class="col-md-6 p-0 d-flex align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <img
+          [src]="product.Img"
+          class="img-fluid product-zoom ms-5 my-3 rounded-5"
+          alt="{{ product.Name }}"
+        />
+      </div>
 
-      <img [src]="product.Img" width="300" />
+      <div class="col-md-6 p-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="/products" class="text-decoration-none text-muted">Store</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+          </ol>
+        </nav>
 
-      <p class="mt-3">Price: {{ product.Price }} EGP</p>
-      <p>Quantity: {{ product.Quantity }}</p>
+        <h2 class="display-5 fw-bold text-dark">{{ product.Name }}</h2>
 
-      <button routerLink="/products" class="btn mt-3">
-        Back
-      </button>
+        <h3 class="text-primary fw-bold mb-4 price-tag">
+          {{ product.Price }} <small class="fs-6 text-muted text-uppercase">EGP</small>
+        </h3>
+
+        <div class="product-meta mb-4 p-3 bg-light rounded-3">
+          <p class="mb-1">
+            <strong>Availability:</strong>
+            <span
+              [class.text-danger]="product.Quantity <= 0"
+              [class.text-success]="product.Quantity > 0"
+            >
+              {{ product.Quantity > 0 ? 'In Stock (' + product.Quantity + ')' : 'Out of Stock' }}
+            </span>
+          </p>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button routerLink="/products" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">
+            <i class="bi bi-arrow-left"></i> Back
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+}

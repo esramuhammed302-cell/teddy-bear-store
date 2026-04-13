@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../Services/ProductService';
 import { IProduct } from '../../Models/Iproduct';
-
 @Component({
   selector: 'app-product-details-page',
   standalone: true,
