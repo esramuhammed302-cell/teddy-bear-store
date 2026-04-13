@@ -43,16 +43,16 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
         </li>
-
-        <ng-container *ngIf="!isLoggedIn">
-          <li class="nav-item ms-lg-3">
-            <a class="btn btn-register" routerLink="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-register" routerLink="/register">Register</a>
-          </li>
-        </ng-container>
-
+        @if (!isLoggedIn) {
+          <div class="d-flex ">
+            <li class="nav-item ms-lg-3">
+              <a class="btn btn-register" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-register" routerLink="/register">Register</a>
+            </li>
+          </div>
+        }
         <li class="nav-item ms-lg-3" *ngIf="isLoggedIn">
           <button class="btn btn-register" (click)="logout()">Logout</button>
         </li>

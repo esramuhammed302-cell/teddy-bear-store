@@ -6,20 +6,3 @@ export interface IProduct {
   Img: string;
   CategoryID: number;
 }
-
-
-
-
-
-// export interface IProduct {
-//   id: number;
-//   title: string;
-//   price: number;
-//   description: string;
-//   images: string[];
-//   category: {
-//     id: number;
-//     name: string;
-//     image: string;
-//   };
-// }

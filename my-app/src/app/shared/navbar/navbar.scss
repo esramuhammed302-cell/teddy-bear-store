@@ -35,6 +35,7 @@
     &:hover {
       background-color: transparent;
       color: wheat !important;
+      box-shadow: 0 0 10px rgba(245, 222, 179, 0.5);
     }
   }
 
@@ -43,6 +44,4 @@
     background-color: wheat;
   }
 }
-.active-btn {
-  box-shadow: 0 0 10px rgba(245, 222, 179, 0.5);
-}
+
