@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private TOKEN_KEY = 'access_token';
+  private TOKEN_KEY = 'https://api.escuelajs.co/api/v1/auth/login';
 
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
