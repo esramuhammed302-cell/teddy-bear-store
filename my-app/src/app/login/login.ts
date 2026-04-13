@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../Services/AuthService';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -18,6 +18,7 @@ export class Login {
   isLoading = false;
 
   constructor(
+    private toastr: ToastrService,
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
@@ -56,6 +57,7 @@ export class Login {
       this.authService.setToken(data.access_token);
       this.loggedUser = { email };
       this.loginForm.reset();
+      this.toastr.success('Login successful', 'Welcome!');
       setTimeout(() => this.router.navigate(['/products']), 800);
     } catch (err) {
       this.errorMsg = 'Network error. Please try again.';
@@ -72,42 +74,3 @@ export class Login {
 }
 
 
-// import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-// import { CommonModule } from '@angular/common';
-
-// @Component({
-//   selector: 'app-login',
-//   standalone: true,
-//   imports: [ReactiveFormsModule, CommonModule],
-//   templateUrl: './login.html',
-//   styleUrl: './login.scss'
-// })
-// export class Login {
-//   loginForm: FormGroup;
-//   isSubmitted = false;
-//   loggedUser: any = null;
-
-//   constructor(private fb: FormBuilder) {
-//     this.loginForm = this.fb.group({
-//       email: ['', [Validators.required, Validators.email]],
-//       password: ['', [Validators.required, Validators.minLength(6)]]
-//     });
-//   }
-
-//   onLogin() {
-//     this.isSubmitted = true;
-//     if (this.loginForm.valid) {
-//       this.loggedUser = this.loginForm.value;
-//       console.log("Logged In:", this.loggedUser);
-//       this.loginForm.reset(); 
-//       this.isSubmitted = false;
-//     }
-//   }
-
-//   onReset() {
-//     this.isSubmitted = false;
-//     this.loginForm.reset();
-//     this.loggedUser = null;
-//   }
-// }

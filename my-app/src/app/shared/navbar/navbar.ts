@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Store } from '../../Models/Store';
 import { AuthService } from '../../Services/AuthService';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -21,6 +21,7 @@ export class Navbar {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private toastr: ToastrService
   ) {}
 
   get isLoggedIn(): boolean {
@@ -29,6 +30,7 @@ export class Navbar {
 
   logout() {
     this.authService.logout();
+    this.toastr.info('Logout successful');
     this.router.navigate(['/home']);
   }
 }

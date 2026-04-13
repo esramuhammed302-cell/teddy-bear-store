@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ToastrService } from 'ngx-toastr';
 interface PlatziProduct {
   id: number;
   title: string;
@@ -19,14 +19,14 @@ interface PlatziProduct {
 })
 export class SearchProducts implements OnInit {
   searchQuery: string = '';
-  allProducts: PlatziProduct[] = []; 
-  results: PlatziProduct[] = []; 
+  allProducts: PlatziProduct[] = [];
+  results: PlatziProduct[] = [];
   isLoading: boolean = false;
   error: string = '';
   searched: boolean = false;
   private timeout: any;
 
-  constructor() {}
+  constructor(private toastr: ToastrService) {}
 
   ngOnInit() {
     this.loadAllProducts();
@@ -35,16 +35,19 @@ export class SearchProducts implements OnInit {
   async loadAllProducts() {
     this.isLoading = true;
     this.error = '';
+    if (this.allProducts.length > 0) {
+      this.toastr.success('Search completed', `Found ${this.allProducts.length} products`);
+    }
 
     try {
       const res = await fetch('https://api.escuelajs.co/api/v1/products');
       const data = await res.json();
-      
+
       this.allProducts = data;
       this.results = data;
-      
-      console.log("Total Products Loaded:", this.allProducts.length);
-      
+
+      console.log('Total Products Loaded:', this.allProducts.length);
+
       this.searched = true;
     } catch (err) {
       this.error = 'Failed to load products from API';
@@ -67,19 +70,17 @@ export class SearchProducts implements OnInit {
       this.results = this.allProducts;
       return;
     }
-    this.results = this.allProducts.filter((p) =>
-      p.title.toLowerCase().includes(keyword)
-    );
+    this.results = this.allProducts.filter((p) => p.title.toLowerCase().includes(keyword));
   }
 
   getImage(product: PlatziProduct): string {
     if (!product.images || product.images.length === 0) {
       return 'https://placehold.co/300x200?text=No+Image';
     }
-    
+
     let rawImg = product.images[0];
     const cleanImg = rawImg.replace(/[\[\]"\\]/g, '');
-    
+
     return cleanImg.startsWith('http') ? cleanImg : 'https://placehold.co/300x200?text=Invalid+URL';
   }
 }
