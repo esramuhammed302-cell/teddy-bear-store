@@ -44,7 +44,7 @@
           <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
         </li>
         @if (!isLoggedIn) {
-          <div class="d-flex ">
+          <div class="d-flex">
             <li class="nav-item ms-lg-3">
               <a class="btn btn-register" routerLink="/login">Login</a>
             </li>
@@ -53,9 +53,11 @@
             </li>
           </div>
         }
-        <li class="nav-item ms-lg-3" *ngIf="isLoggedIn">
-          <button class="btn btn-register" (click)="logout()">Logout</button>
-        </li>
+        @if (isLoggedIn) {
+          <li class="nav-item ms-lg-3">
+            <button class="btn btn-register" (click)="logout()">Logout</button>
+          </li>
+        }
       </ul>
     </div>
   </div>
