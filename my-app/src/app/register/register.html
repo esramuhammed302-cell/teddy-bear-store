@@ -18,10 +18,12 @@
       />
       <div class="valid-feedback">Looks good!</div>
       <div class="invalid-feedback">
-        <span *ngIf="regForm.get('fullName')?.errors?.['required']">Full name is required.</span>
-        <span *ngIf="regForm.get('fullName')?.errors?.['minlength']"
-          >Name must be at least 5 characters.</span
-        >
+        @if (regForm.get('fullName')?.errors?.['required']) {
+          <span>Full name is required.</span>
+        }
+        @if (regForm.get('fullName')?.errors?.['minlength']) {
+          <span>Name must be at least 5 characters.</span>
+        }
       </div>
     </div>
 
@@ -41,14 +43,12 @@
       />
       <div class="valid-feedback">Valid email!</div>
       <div class="invalid-feedback">
-        <span *ngIf="regForm.get('email')?.errors?.['required']">Email is required.</span>
-        <span
-          *ngIf="
-            regForm.get('email')?.errors?.['email'] || regForm.get('email')?.errors?.['pattern']
-          "
-        >
-          Please enter a valid email (e.g. user@example.com).
-        </span>
+        @if (regForm.get('email')?.errors?.['required']) {
+          <span>Email is required.</span>
+        }
+        @if (regForm.get('email')?.errors?.['email'] || regForm.get('email')?.errors?.['pattern']) {
+          <span> Please enter a valid email (e.g. user@example.com). </span>
+        }
       </div>
     </div>
 
@@ -78,7 +78,6 @@
       </button>
     </div>
 
-    <!-- Password -->
     <div class="mb-3">
       <label class="form-label">Password</label>
       <input
@@ -102,7 +101,6 @@
       </div>
     </div>
 
-    <!-- Confirm Password -->
     <div class="mb-3">
       <label class="form-label">Confirm Password</label>
       <input

@@ -4,18 +4,19 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../Services/AuthService';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss',
+  styleUrls: ['./login.scss'],
 })
 export class Login {
   loginForm: FormGroup;
-  loggedUser: any = null;
   errorMsg: string = '';
   isLoading = false;
+  loggedUser: any = null;
 
   constructor(
     private toastr: ToastrService,
@@ -29,7 +30,7 @@ export class Login {
     });
   }
 
-  async onLogin() {
+  onLogin() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -38,39 +39,32 @@ export class Login {
     this.isLoading = true;
     this.errorMsg = '';
 
-    try {
-      const { email, password } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
-      const res = await fetch('https://api.escuelajs.co/api/v1/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+    this.authService.login({ email, password }).subscribe({
+      next: (data: any) => {
+        this.authService.setToken(data.access_token);
 
-      const data = await res.json();
+        this.loginForm.reset();
 
-      if (!res.ok) {
-        this.errorMsg = data.message || 'Invalid credentials. Please try again.';
-        return;
-      }
+        this.toastr.success('Login successful', 'Welcome!');
 
-      this.authService.setToken(data.access_token);
-      this.loggedUser = { email };
-      this.loginForm.reset();
-      this.toastr.success('Login successful', 'Welcome!');
-      setTimeout(() => this.router.navigate(['/products']), 800);
-    } catch (err) {
-      this.errorMsg = 'Network error. Please try again.';
-    } finally {
-      this.isLoading = false;
-    }
+        this.router.navigate(['/products']);
+      },
+
+      error: (err: any) => {
+        this.errorMsg = err.error?.message || 'Invalid credentials. Please try again.';
+        this.isLoading = false;
+      },
+
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 
   onReset() {
     this.loginForm.reset();
-    this.loggedUser = null;
     this.errorMsg = '';
   }
 }
-
-
