@@ -17,12 +17,11 @@ interface PlatziProduct {
 @Component({
   selector: 'app-search-products',
   standalone: true,
-  imports: [CommonModule, FormsModule ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './search-products.html',
   styleUrl: './search-products.scss',
 })
 export class SearchProducts implements OnInit {
-
   searchQuery: string = '';
   allProducts: PlatziProduct[] = [];
   results: PlatziProduct[] = [];
@@ -34,15 +33,13 @@ export class SearchProducts implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private http: HttpClient   
+    private http: HttpClient,
   ) {}
 
   ngOnInit() {
     this.loadAllProducts();
 
-    this.searchSubject.pipe(
-      debounceTime(300)
-    ).subscribe(() => {
+    this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
       this.searchProducts();
     });
   }
@@ -51,22 +48,21 @@ export class SearchProducts implements OnInit {
     this.isLoading = true;
     this.error = '';
 
-    this.http.get<PlatziProduct[]>('https://api.escuelajs.co/api/v1/products')
-      .subscribe({
-        next: (data) => {
-          this.allProducts = data;
-          this.results = data;
-          this.searched = true;
+    this.http.get<PlatziProduct[]>('https://api.escuelajs.co/api/v1/products').subscribe({
+      next: (data) => {
+        this.allProducts = data;
+        this.results = data;
+        this.searched = true;
 
-          this.toastr.success(`Found ${data.length} products`);
-        },
-        error: () => {
-          this.error = 'Failed to load products from API';
-        },
-        complete: () => {
-          this.isLoading = false;
-        }
-      });
+        this.toastr.success(`Found ${data.length} products`);
+      },
+      error: () => {
+        this.error = 'Failed to load products from API';
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 
   onSearchChange() {
@@ -81,9 +77,7 @@ export class SearchProducts implements OnInit {
       return;
     }
 
-    this.results = this.allProducts.filter(p =>
-      p.title.toLowerCase().includes(keyword)
-    );
+    this.results = this.allProducts.filter((p) => p.title.toLowerCase().includes(keyword));
   }
 
   trackById(index: number, item: PlatziProduct) {
@@ -91,9 +85,8 @@ export class SearchProducts implements OnInit {
   }
 
   getImage(product: PlatziProduct): string {
-    return product.images?.[0]?.replace(/[\[\]"\\]/g, '')
-      || 'https://placehold.co/300x200?text=No+Image';
+    return (
+      product.images?.[0]?.replace(/[\[\]"\\]/g, '') || 'https://placehold.co/300x200?text=No+Image'
+    );
   }
-
-  
 }

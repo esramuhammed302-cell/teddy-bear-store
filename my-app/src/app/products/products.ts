@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Store } from '../Models/Store';
 import { IProduct } from '../Models/Iproduct';
 import { ICategory } from '../Models/Icategory';
 import { FormsModule } from '@angular/forms';
