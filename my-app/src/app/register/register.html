@@ -54,20 +54,24 @@
 
     <div formArrayName="mobiles" class="mb-3">
       <label class="form-label">Mobile Number(s)</label>
-      <div *ngFor="let m of mobileControls.controls; let i = index" class="d-flex gap-2 mb-2">
-        <div class="flex-grow-1">
-          <input
-            [formControlName]="i"
-            class="form-control"
-            placeholder="01XXXXXXXXX"
-            [ngClass]="m.touched ? (m.valid ? 'is-valid' : 'is-invalid') : ''"
-          />
-          <div class="invalid-feedback">Enter a valid Egyptian mobile number (01XXXXXXXXX).</div>
+      @for (m of mobileControls.controls; track m ; let i = $index) {
+        <div class="d-flex gap-2 mb-2">
+          <div class="flex-grow-1">
+            <input
+              [formControlName]="i"
+              class="form-control"
+              placeholder="01XXXXXXXXX"
+              [ngClass]="m.touched ? (m.valid ? 'is-valid' : 'is-invalid') : ''"
+            />
+            <div class="invalid-feedback">Enter a valid Egyptian mobile number (01XXXXXXXXX).</div>
+          </div>
+          @if (i > 0) {
+            <button type="button" class="btn btn-danger btn-sm" (click)="removeMobile(i)">
+              Remove
+            </button>
+          }
         </div>
-        <button type="button" class="btn btn-danger btn-sm" (click)="removeMobile(i)" *ngIf="i > 0">
-          Remove
-        </button>
-      </div>
+      }
       <button
         type="button"
         class="btn btn-sm"
@@ -94,9 +98,12 @@
       />
       <div class="valid-feedback">Strong password!</div>
       <div class="invalid-feedback">
-        <span *ngIf="regForm.get('password')?.errors?.['required']">Password is required.</span>
-        <span *ngIf="regForm.get('password')?.errors?.['minlength']"
-          >Password must be at least 6 characters.</span
+        @if (regForm.get('password')?.errors?.['required']) {
+          <span>Password is required.</span>
+        }
+        @if (regForm.get('password')?.errors?.['minlength']) {
+          <span>Password must be at least 6 characters.</span>
+        }
         >
       </div>
     </div>
@@ -127,11 +134,12 @@
       Reset Form
     </button>
   </form>
-
-  <div *ngIf="showCard" class="card mt-4 p-3 border-success">
-    <h5 class="text-success">🎉 Registered successfully!</h5>
-    <p><strong>Name:</strong> {{ userData.fullName }}</p>
-    <p><strong>Email:</strong> {{ userData.email }}</p>
-    <p><strong>Mobiles:</strong> {{ userData.mobiles.join(', ') }}</p>
-  </div>
+  @if (showCard) {
+    <div class="card mt-4 p-3 border-success">
+      <h5 class="text-success">🎉 Registered successfully!</h5>
+      <p><strong>Name:</strong> {{ userData.fullName }}</p>
+      <p><strong>Email:</strong> {{ userData.email }}</p>
+      <p><strong>Mobiles:</strong> {{ userData.mobiles.join(', ') }}</p>
+    </div>
+  }
 </div>

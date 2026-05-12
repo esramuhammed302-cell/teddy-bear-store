@@ -23,9 +23,11 @@
       <p class="mt-2">Fetching amazing products...</p>
     </div>
   }
-  <div *ngIf="error" class="alert alert-danger text-center shadow-sm">
-    {{ error }}
-  </div>
+  @if (error) {
+    <div class="alert alert-danger text-center shadow-sm">
+      {{ error }}
+    </div>
+  }
   @if (searched && !isLoading && results.length === 0) {
     <div class="text-center my-5">
       <img src="https://placehold.co/200x150?text=No+Results" class="mb-3 opacity-50" />
